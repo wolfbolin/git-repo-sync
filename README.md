@@ -19,20 +19,17 @@
 ### 从源码构建
 
 ```bash
-git clone <repo-url>
-cd GitRepoSync
+git clone https://github.com/wolfbolin/git-repo-sync.git
+cd git-repo-sync
 
 # 一次性同步工具
 go build -o git-repo-sync ./cmd/git-repo-sync/
 
 # 守护进程
 go build -o git-repo-sync-daemon ./cmd/git-repo-sync-daemon/
-```
 
-### Docker
-
-```bash
-docker pull hub.wiolfi.net:23333/wolfbolin/git-repo-sync:20260410
+# 容器镜像
+podman build --tag git-repo-sync:latest .
 ```
 
 ## 使用
@@ -64,7 +61,7 @@ docker run -d \
   -v ./config.yaml:/etc/git-repo-sync/config.yaml:ro \
   -v ~/.ssh:/root/.ssh:ro \
   --name git-repo-sync \
-  hub.wiolfi.net:23333/wolfbolin/git-repo-sync:20260410
+  git-repo-sync:latest
 ```
 
 容器内也可执行一次性同步：
@@ -180,21 +177,6 @@ repo: ssh://git@host.com:2222/org/repo.git
 
 # 错误 — 2222 会被解析为路径，实际连接 22 端口
 repo: git@host.com:2222/org/repo.git
-```
-
-## Docker 镜像构建
-
-项目提供双架构（x86_64 + aarch64）镜像构建脚本：
-
-```bash
-# 需要提前配置 Docker buildx
-docker buildx create --use
-
-# 登录镜像仓库
-docker login hub.wiolfi.net:23333
-
-# 构建并推送
-./build.sh
 ```
 
 ## 项目结构
