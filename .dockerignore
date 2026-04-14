@@ -1,0 +1,7 @@
+GitRepoSync
+git-repo-sync
+git-repo-sync-daemon
+*.yaml
+.claude/
+docs/
+README.md

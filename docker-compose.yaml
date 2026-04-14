@@ -1,0 +1,8 @@
+services:
+  git-sync:
+    image: hub.wiolfi.net:23333/wolfbolin/git-repo-sync:20260411
+    container_name: git-sync
+    restart: always
+    volumes:
+      - ./config.yaml:/opt/git-repo-sync/config.yaml:ro
+      - ${HOME}/.ssh:/root/.ssh:ro
